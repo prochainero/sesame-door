@@ -1,0 +1,5 @@
+# 放到 /etc/caddy/Caddyfile（把名字換成你的 DuckDNS 子網域）
+# Caddy 會自動申請並更新 https 憑證
+你的名字.duckdns.org {
+    reverse_proxy 127.0.0.1:3000
+}

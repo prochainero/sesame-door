@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">芝麻開門</string>
+    <string name="shortcut_open_short">開門</string>
+    <string name="shortcut_open_long">芝麻開門：開門</string>
+    <string name="shortcut_settings_short">設定</string>
+    <string name="shortcut_settings_long">芝麻開門設定</string>
+    <string name="shortcut_disabled">芝麻開門捷徑目前無法使用</string>
+</resources>

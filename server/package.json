@@ -1,0 +1,24 @@
+{
+  "name": "sesame-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "芝麻開門伺服器：接收手機 App 的抵達回報，透過 eWeLink Cloud API 開門",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --test test/server.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ewelink-api-next": "^1.0.4"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

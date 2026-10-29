@@ -1,0 +1,20 @@
+# 放到 /etc/systemd/system/sesame.service
+# User 與路徑請依實際情況修改（Oracle 的 Ubuntu 預設使用者通常是 ubuntu）
+[Unit]
+Description=Sesame door server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/sesame-server
+EnvironmentFile=/home/ubuntu/sesame-server/.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+# 基本防護
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

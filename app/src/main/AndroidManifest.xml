@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.USE_FULL_SCREEN_INTENT" />
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
+
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="芝麻開門"
+        android:usesCleartextTraffic="false"
+        android:theme="@android:style/Theme.Material.Light.DarkActionBar">
+
+        <!-- 語音/圖示入口：執行開門 Intent 後立即結束，不顯示 Door Sesame 設定畫面。 -->
+        <activity
+            android:name=".OpenDoorActivity"
+            android:exported="true"
+            android:label="芝麻開門"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
+        </activity>
+
+        <!-- 設定頁不再是第二個 App 圖示，從圖示長按的「設定」捷徑開啟。 -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="芝麻開門設定">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="sesame" android:host="auth" />
+            </intent-filter>
+        </activity>
+
+        <receiver android:name=".GeofenceReceiver" android:exported="false" />
+        <receiver
+            android:name=".GeofenceBootReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".DoorService"
+            android:exported="false"
+            android:foregroundServiceType="location" />
+    </application>
+</manifest>
